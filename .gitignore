@@ -1,0 +1,105 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+
+############################
+# OS metadata
+############################
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+############################
+# Eclipse / STS metadata
+############################
+.project
+.classpath
+.settings/
+.springBeans
+.sts4-cache/
+
+############################
+# Build output
+############################
+target/
+
+############################
+# Logs
+############################
+*.log
+logs/
+
+############################
+# Runtime / temp files
+############################
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+*.pid
+*.pid.lock
+
+############################
+# Environment / secrets
+############################
+.env
+.env.*
+*.env
+
+# Spring profiles (local/dev/prod should NOT be committed)
+application-*.properties
+application-*.yml
+
+############################
+# Databases (local only)
+############################
+*.db
+*.sqlite
+*.sqlite3
+*.h2.db
+*.mv.db
+
+############################
+# Test & coverage
+############################
+coverage/
+*.exec
+
+############################
+# Misc
+############################
+*.bak
+*.old
+*.orig
