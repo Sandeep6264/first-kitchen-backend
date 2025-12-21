@@ -7,7 +7,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql:///firstkitchen
     username: root
-    password: Sandeep@123
+    password: dummany@123
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
