@@ -79,8 +79,8 @@ temp/
 *.env
 
 # Spring profiles (local/dev/prod should NOT be committed)
-application-*.properties
-application-*.yml
+# application-*.properties
+# application-*.yml
 
 ############################
 # Databases (local only)
