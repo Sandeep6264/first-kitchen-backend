@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nt.common.CustomUserDetails;
 import com.nt.entity.UserEntity;
 import com.nt.requestDTO.LoginDTO;
 import com.nt.requestDTO.UserInfoDTO;
@@ -49,13 +50,14 @@ public class UserController {
 		
 		@PostMapping("/login")
 		public ResponseEntity<?> loginUser(@RequestBody LoginDTO authRequest){
-			Authentication authentication=authenticationManager.authenticate(
+			
+				Authentication authentication=authenticationManager.authenticate(
 						new UsernamePasswordAuthenticationToken(authRequest.getUserName(),authRequest.getPassword())
 				);
 			Object principal= authentication.getPrincipal();
 			if(authentication.isAuthenticated()) {
 				String token=jwtService.generateToken(authRequest.getUserName());
-				User user=(User) principal;
+				CustomUserDetails user=(CustomUserDetails) principal;
 				AuthResponseDTO authResponseDTO=new AuthResponseDTO();
 				authResponseDTO.setAccessToken(token);
 				UserEntity userEntity=userService.getUserDetails(authRequest.getUserName());
@@ -69,9 +71,11 @@ public class UserController {
 				authResponseDTO.setAccessRole(roles);
 				return ResponseUtil.success(authResponseDTO, "User login successfully");
 			}else {
-				return ResponseUtil.error(404, "Invalid user request!");
+				return ResponseUtil.error(401, "Invalid user request!");
 
 			}
+			
+			
 	
 		}
 

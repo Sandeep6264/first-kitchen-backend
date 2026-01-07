@@ -12,4 +12,8 @@ public class GlobleException {
 	public ResponseEntity<?> IllegalArgumentException(IllegalArgumentException ie){
 		return ResponseUtil.error(404, ie.getMessage());
 	}
+	@ExceptionHandler(org.springframework.security.authentication.BadCredentialsException.class)
+	public ResponseEntity<?> handleBadCredentialsException(org.springframework.security.authentication.BadCredentialsException bce){
+		return ResponseUtil.error(401, "Invalid username/password");
+	}
 }

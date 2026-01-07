@@ -1,18 +1,19 @@
 package com.nt.filter;
 
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nt.common.CustomUserDetails;
 import com.nt.requestDTO.JwtErrorResponseDTO;
 import com.nt.util.JwtUtil;
 
@@ -59,9 +60,10 @@ public class JwtAuthFilter  extends OncePerRequestFilter{
 				token=authHeader.substring(7);
 				username=jwtService.getUsername(token);
 			}if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null) {
-				UserDetails user=userDetailsService.loadUserByUsername(username);
-				if(jwtService.validateToken(token,user)) {
-					UsernamePasswordAuthenticationToken authToken=new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
+				CustomUserDetails userDetails =
+				        (CustomUserDetails)userDetailsService.loadUserByUsername(username);
+				if(jwtService.validateToken(token,userDetails)) {
+					UsernamePasswordAuthenticationToken authToken=new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
 					authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 	                SecurityContextHolder.getContext().setAuthentication(authToken);
 				}

@@ -2,6 +2,7 @@ package com.nt.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,12 @@ public class OrderOperationController {
 	
 	@PostMapping("/placeOrder")
 	public ResponseEntity<?> placeOrder(@RequestBody OrderRequestDTO orderRequestDTO){
-//		System.out.println(orderRequestDTO);
 		OrderResponseDTO orderResponseDTO=orderService.placeOrder(orderRequestDTO);
 		return ResponseUtil.success(orderResponseDTO, "Order placed successfully");
+	}
+	
+	@GetMapping("/myOrders")
+	public ResponseEntity<?> fetchMyOrders(){
+		return ResponseUtil.success(orderService.findMyOrders(), "Your order successfully fetched");
 	}
 }

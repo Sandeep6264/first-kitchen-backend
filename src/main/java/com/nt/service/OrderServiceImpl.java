@@ -6,8 +6,11 @@ import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.nt.common.CustomUserDetails;
 import com.nt.entity.ItemEntity;
 import com.nt.entity.OrderItemEntity;
 import com.nt.entity.OrdersEntity;
@@ -66,6 +69,16 @@ public class OrderServiceImpl implements IOrderService {
 		OrderResponseDTO ordereResponseDTO=new OrderResponseDTO(savedRecord.getOid(),savedRecord.getOrderDate(),savedRecord.getTotalAmount(),savedRecord.getStatus(),savedRecord.getUser().getUid());
 		
 		return ordereResponseDTO;
+		
+	}
+	
+	@Override
+	public List<OrdersEntity> findMyOrders() {
+		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
+		CustomUserDetails user =
+		        (CustomUserDetails) auth.getPrincipal();
+		Long userId = user.getId();
+		return orderRepository.findByUser_uid(userId);
 		
 	}
 

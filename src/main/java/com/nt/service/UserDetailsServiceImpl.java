@@ -2,16 +2,14 @@ package com.nt.service;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 //import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.nt.common.CustomUserDetails;
 import com.nt.entity.UserEntity;
 import com.nt.repository.IUserDetailsRepo;
 import com.nt.requestDTO.UserInfoDTO;
@@ -54,14 +52,10 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 	public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Optional<com.nt.entity.UserEntity> opt=userDetailsRepo.findByEmail(username);
 		if(opt.isEmpty()) 
-			throw new IllegalArgumentException("User not found");
+			throw new IllegalArgumentException("Invalid Username / Passoword");
 		else {
 			com.nt.entity.UserEntity  details=opt.get();
-			User user=new User(
-						details.getEmail(),
-						details.getPassword(),
-						details.getRoles().stream().map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toSet()));
-			return user;
+			return new CustomUserDetails(details);
 		}
 	}
 

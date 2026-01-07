@@ -40,6 +40,7 @@ public class OrdersEntity {
     @Column(name = "TOTAL_AMOUNT")
     private Double totalAmount;
 
+    @JsonIgnore
     @ManyToOne(targetEntity = UserEntity.class,fetch=FetchType.LAZY)
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     private UserEntity user;

@@ -1,13 +1,13 @@
 spring:
   profiles:
-    active: prod
+    active: dev
   application:
     name: FirstKitchen
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql:///firstkitchen
-    username: root
-    password: dummy@123
+    username: dummy
+    password: dummy@123333
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
