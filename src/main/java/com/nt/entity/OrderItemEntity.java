@@ -9,17 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Entity
 @Table(name="order_items")
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
+
 public class OrderItemEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,6 +34,81 @@ public class OrderItemEntity {
 	@ManyToOne(targetEntity=ItemEntity.class,fetch=FetchType.LAZY)
 	@JoinColumn(name = "ITEM_ID",referencedColumnName="ITEM_ID")
 	private ItemEntity item;
+
+
+	public Long getOrderItemId() {
+		return orderItemId;
+	}
+
+
+	public void setOrderItemId(Long orderItemId) {
+		this.orderItemId = orderItemId;
+	}
+
+
+	public Long getQty() {
+		return qty;
+	}
+
+
+	public void setQty(Long qty) {
+		this.qty = qty;
+	}
+
+
+	public Double getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+
+	public OrdersEntity getOrder() {
+		return order;
+	}
+
+
+	public void setOrder(OrdersEntity order) {
+		this.order = order;
+	}
+
+
+	public ItemEntity getItem() {
+		return item;
+	}
+
+
+	public void setItem(ItemEntity item) {
+		this.item = item;
+	}
+
+
+	@Override
+	public String toString() {
+		return "OrderItemEntity [orderItemId=" + orderItemId + ", qty=" + qty + ", price=" + price + ", order=" + order
+				+ ", item=" + item + "]";
+	}
+
+
+	public OrderItemEntity(Long orderItemId, Long qty, Double price, OrdersEntity order, ItemEntity item) {
+		super();
+		this.orderItemId = orderItemId;
+		this.qty = qty;
+		this.price = price;
+		this.order = order;
+		this.item = item;
+	}
+
+
+	public OrderItemEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	
 
 }

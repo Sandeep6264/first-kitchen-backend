@@ -19,19 +19,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+
 
 @Entity
 @Table(name = "orders")
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@Setter
-@Getter
 public class OrdersEntity {
 
     @Id
@@ -60,4 +51,62 @@ public class OrdersEntity {
         items.add(item);
         item.setOrder(this);
     }
+	public Long getOid() {
+		return oid;
+	}
+	public void setOid(Long oid) {
+		this.oid = oid;
+	}
+	public LocalDateTime getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(LocalDateTime orderDate) {
+		this.orderDate = orderDate;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Double getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(Double totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+	public UserEntity getUser() {
+		return user;
+	}
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
+	public Set<OrderItemEntity> getItems() {
+		return items;
+	}
+	public void setItems(Set<OrderItemEntity> items) {
+		this.items = items;
+	}
+	@Override
+	public String toString() {
+		return "OrdersEntity [oid=" + oid + ", orderDate=" + orderDate + ", status=" + status + ", totalAmount="
+				+ totalAmount + ", user=" + user + ", items=" + items + "]";
+	}
+	public OrdersEntity(Long oid, LocalDateTime orderDate, String status, Double totalAmount, UserEntity user,
+			Set<OrderItemEntity> items) {
+		super();
+		this.oid = oid;
+		this.orderDate = orderDate;
+		this.status = status;
+		this.totalAmount = totalAmount;
+		this.user = user;
+		this.items = items;
+	}
+	public OrdersEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+    
+    
 }
