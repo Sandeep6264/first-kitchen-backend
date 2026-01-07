@@ -56,7 +56,6 @@ public class ResponseModel<T> {
 	  }
 	  public ResponseModel() {
 		super();
-		// TODO Auto-generated constructor stub
 	  }
 	  
 }

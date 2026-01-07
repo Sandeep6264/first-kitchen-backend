@@ -65,6 +65,15 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 		}
 	}
 
+	@Override
+	public UserEntity getUserDetails(String username) {
+		return userDetailsRepo.findByEmail(username).orElseThrow(()->new UsernameNotFoundException("User not found with email: " + username));
+	}
+	
+	
+	
+	
+
 
 
 

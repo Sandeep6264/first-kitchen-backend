@@ -10,12 +10,12 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nt.entity.UserEntity;
 import com.nt.requestDTO.LoginDTO;
 import com.nt.requestDTO.UserInfoDTO;
 import com.nt.responseDTO.AuthResponseDTO;
@@ -49,8 +49,6 @@ public class UserController {
 		
 		@PostMapping("/login")
 		public ResponseEntity<?> loginUser(@RequestBody LoginDTO authRequest){
-			System.out.println(authRequest.getUserName());
-			System.out.println(authRequest.getPassword());
 			Authentication authentication=authenticationManager.authenticate(
 						new UsernamePasswordAuthenticationToken(authRequest.getUserName(),authRequest.getPassword())
 				);
@@ -60,9 +58,14 @@ public class UserController {
 				User user=(User) principal;
 				AuthResponseDTO authResponseDTO=new AuthResponseDTO();
 				authResponseDTO.setAccessToken(token);
+				UserEntity userEntity=userService.getUserDetails(authRequest.getUserName());
+				authResponseDTO.setUserEmail(userEntity.getEmail());
+				authResponseDTO.setUserGender(userEntity.getGender());
+				authResponseDTO.setUserName(userEntity.getUserName());
+				authResponseDTO.setUserId(userEntity.getUid());
+				
 				Set<String> roles = new HashSet<>();
 				user.getAuthorities().forEach(authority -> roles.add(authority.getAuthority()));
-
 				authResponseDTO.setAccessRole(roles);
 				return ResponseUtil.success(authResponseDTO, "User login successfully");
 			}else {
