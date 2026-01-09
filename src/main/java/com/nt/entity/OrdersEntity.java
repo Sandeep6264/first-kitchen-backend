@@ -7,6 +7,7 @@ import java.util.Set;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -46,8 +47,10 @@ public class OrdersEntity {
     private UserEntity user;
    
     @JsonIgnore
+    @JsonManagedReference
     @OneToMany(targetEntity = OrderItemEntity.class, mappedBy = "order",cascade = CascadeType.ALL,  orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OrderItemEntity> items=new HashSet<>();
+    
     public void addItem(OrderItemEntity item) {
         items.add(item);
         item.setOrder(this);

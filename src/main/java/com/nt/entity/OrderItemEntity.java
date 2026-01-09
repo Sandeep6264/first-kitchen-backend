@@ -1,5 +1,7 @@
 package com.nt.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,6 +30,7 @@ public class OrderItemEntity {
 	
 	@ManyToOne(targetEntity=OrdersEntity.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")
+	@JsonBackReference
 	private OrdersEntity order;
 
 	
