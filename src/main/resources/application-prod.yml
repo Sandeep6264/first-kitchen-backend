@@ -42,10 +42,10 @@ app:
 
 razorpay:
    key:
-      id: rzp_test_S34JO6MNJA84dX
-      secret : 7OMA2R77x7qcVirtqpCHp7ny
+      id: ${RAZORPAY_ID}
+      secret : ${RAZORPAY_SECRETE}
    webhook:
-      secret: KpkZNLuU43h@qsT
+      secret: ${WEB_HOOK_SECRETE}
 retry:
    max-attempts: 3
    backoff-delay: 1000
