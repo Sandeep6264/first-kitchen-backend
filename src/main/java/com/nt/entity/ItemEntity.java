@@ -3,6 +3,7 @@ package com.nt.entity;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,8 +51,8 @@ public class ItemEntity {
 	@Column(name="half_price")
 	private Double halfPrice;
 	
+//	@JsonManagedReference
 	@OneToMany(orphanRemoval = true,targetEntity = OrderItemEntity.class,mappedBy = "item",fetch = FetchType.LAZY)
-	@JsonIgnore
 	private Set<OrderItemEntity> orderItemEntity;
 
 	@Override

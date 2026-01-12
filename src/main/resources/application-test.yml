@@ -1,0 +1,20 @@
+# src/test/resources/application-test.yml
+razorpay:
+  key:
+    id: test_key_id
+    secret: test_key_secret
+  webhook:
+    secret: test_webhook_secret
+
+spring:
+  security:
+    user:
+      name: admin
+      password: changeit
+  
+  cache:
+    type: none  
+
+logging:
+  level:
+    com.nit: DEBUG

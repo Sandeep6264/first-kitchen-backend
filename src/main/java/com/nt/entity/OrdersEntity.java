@@ -46,8 +46,8 @@ public class OrdersEntity {
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     private UserEntity user;
    
-    @JsonIgnore
-    @JsonManagedReference
+  
+//    @JsonManagedReference
     @OneToMany(targetEntity = OrderItemEntity.class, mappedBy = "order",cascade = CascadeType.ALL,  orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OrderItemEntity> items=new HashSet<>();
     

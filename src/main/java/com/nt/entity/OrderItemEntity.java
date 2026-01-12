@@ -1,6 +1,7 @@
 package com.nt.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,14 +29,15 @@ public class OrderItemEntity {
 	@Column(name="price")
 	private Double price;
 	
-	@ManyToOne(targetEntity=OrdersEntity.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity=OrdersEntity.class)
 	@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")
-	@JsonBackReference
+//	@JsonBackReference
 	private OrdersEntity order;
 
 	
 	@ManyToOne(targetEntity=ItemEntity.class,fetch=FetchType.LAZY)
 	@JoinColumn(name = "ITEM_ID",referencedColumnName="ITEM_ID")
+//	@JsonIgnore
 	private ItemEntity item;
 
 

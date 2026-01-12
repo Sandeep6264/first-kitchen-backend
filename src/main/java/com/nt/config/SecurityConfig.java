@@ -34,9 +34,12 @@ public class SecurityConfig {
 			.authorizeHttpRequests(auth  -> auth
 					.requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
 					.requestMatchers("/auth/login","/auth/register").permitAll()
+					.requestMatchers("/api/v1/payments/webhook").permitAll()
+					.requestMatchers("/api/v1/payments/**").authenticated()
 					.requestMatchers("/api/item/**","/api/order/**").hasAnyRole("USER","ADMIN")
 					.requestMatchers("/auth/admin/**").hasRole("ADMIN")
 					.anyRequest().authenticated()
+					
 					)
 			
 			.sessionManagement( sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

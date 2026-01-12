@@ -20,7 +20,9 @@ import com.nt.repository.IOrderItemRepository;
 import com.nt.repository.IOrderRepostiory;
 import com.nt.requestDTO.OrderItemRequestDTO;
 import com.nt.requestDTO.OrderRequestDTO;
+import com.nt.responseDTO.OrderItemDTO;
 import com.nt.responseDTO.OrderResponseDTO;
+import com.nt.responseDTO.ReturnOrderResponseDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -73,12 +75,39 @@ public class OrderServiceImpl implements IOrderService {
 	}
 	
 	@Override
-	public List<OrdersEntity> findMyOrders() {
+	public List<ReturnOrderResponseDTO> findMyOrders() {
 		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
 		CustomUserDetails user =
 		        (CustomUserDetails) auth.getPrincipal();
 		Long userId = user.getId();
-		return orderRepository.findByUser_uid(userId);
+		List<OrdersEntity> orders = orderRepository.findOrdersWithItemsByUser(userId);
+
+		List<ReturnOrderResponseDTO> response = orders.stream()
+		    .map(order -> {
+		        ReturnOrderResponseDTO dto = new ReturnOrderResponseDTO();
+
+		        dto.setOrderId(order.getOid());
+		        dto.setOrderDate(order.getOrderDate());
+		        dto.setStatus(order.getStatus());
+		        dto.setTotalAmount(order.getTotalAmount());
+
+		        List<OrderItemDTO> itemDTOs = order.getItems().stream()
+		            .map(oi -> {
+		                OrderItemDTO i = new OrderItemDTO();
+		                i.setItemId(oi.getItem().getItemId());
+		                i.setItemName(oi.getItem().getItemName());
+		                i.setQty( oi.getQty().intValue());
+		                i.setPrice(oi.getPrice());
+		                return i;
+		            })
+		            .toList();
+
+		        dto.setItems(itemDTOs);
+		        return dto;
+		    })
+		    .toList();
+		return response;
+
 		
 	}
 

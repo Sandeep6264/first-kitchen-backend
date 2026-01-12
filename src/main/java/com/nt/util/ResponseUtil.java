@@ -1,6 +1,7 @@
 package com.nt.util;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,11 @@ public class ResponseUtil {
 	}
 
 	public static <T> ResponseEntity<ResponseModel<T>> error(int code, String message) {
+		ResponseModel<T> body = new ResponseModel<>(code, message, null, LocalDateTime.now(), "F");
+		return new ResponseEntity<>(body, HttpStatus.valueOf(code));
+	}
+	
+	public static <T> ResponseEntity<ResponseModel<T>>error(int code,String message,Map<String, String> details){
 		ResponseModel<T> body = new ResponseModel<>(code, message, null, LocalDateTime.now(), "F");
 		return new ResponseEntity<>(body, HttpStatus.valueOf(code));
 	}

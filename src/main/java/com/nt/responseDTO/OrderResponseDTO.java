@@ -10,6 +10,7 @@ public class OrderResponseDTO {
 		private Double totalAmount;
 		private String status;
 		private Long userId;
+		
 		public Long getOrderId() {
 			return orderId;
 		}

@@ -6,8 +6,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql:///firstkitchen
-    username: dummy
-    password: dummy@123333
+    username: root
+    password: Sandeep@123
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
@@ -16,6 +16,12 @@ spring:
       ddl-auto: update
 server:
   port: 9009
+  ssl:
+     enabled: true
+     key-store: classpath:keystore.p12
+     key-store-password: Sandeep@123
+     key-store-type: PKCS12
+     key-alias: tomcat
   servlet:
     context-path: /FirstKitchen
 
