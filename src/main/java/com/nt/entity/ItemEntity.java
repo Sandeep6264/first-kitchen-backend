@@ -2,15 +2,15 @@ package com.nt.entity;
 
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -54,6 +54,31 @@ public class ItemEntity {
 //	@JsonManagedReference
 	@OneToMany(orphanRemoval = true,targetEntity = OrderItemEntity.class,mappedBy = "item",fetch = FetchType.LAZY)
 	private Set<OrderItemEntity> orderItemEntity;
+	
+	@ElementCollection
+	@CollectionTable(name = "item_ingredients",joinColumns = @JoinColumn(name="itemId"))
+	@Column(name = "ingredient_name")
+	private Set<String> itemIngredients;
+	
+	@Column(name="item_desc", columnDefinition = "TEXT"  )
+	private String itemDescription;
+	
+
+	public Set<String> getItemIngredients() {
+		return itemIngredients;
+	}
+
+	public void setItemIngredients(Set<String> itemIngredients) {
+		this.itemIngredients = itemIngredients;
+	}
+
+	public String getItemDescription() {
+		return itemDescription;
+	}
+
+	public void setItemDescription(String itemDescription) {
+		this.itemDescription = itemDescription;
+	}
 
 	@Override
 	public String toString() {

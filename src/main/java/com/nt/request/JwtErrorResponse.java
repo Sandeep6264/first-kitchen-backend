@@ -1,9 +1,9 @@
-package com.nt.requestDTO;
+package com.nt.request;
 
 import java.time.LocalDateTime;
 
 
-public class JwtErrorResponseDTO {
+public class JwtErrorResponse {
 	private int responseCode;
     private String responseContent;
     private String responseMessage;
@@ -41,11 +41,11 @@ public class JwtErrorResponseDTO {
 	}
 	@Override
 	public String toString() {
-		return "JwtErrorResponseDTO [responseCode=" + responseCode + ", responseContent=" + responseContent
+		return "JwtErrorResponse [responseCode=" + responseCode + ", responseContent=" + responseContent
 				+ ", responseMessage=" + responseMessage + ", responseStatus=" + responseStatus + ", timestamp="
 				+ timestamp + "]";
 	}
-	public JwtErrorResponseDTO(int responseCode, String responseContent, String responseMessage, String responseStatus,
+	public JwtErrorResponse(int responseCode, String responseContent, String responseMessage, String responseStatus,
 			LocalDateTime timestamp) {
 		super();
 		this.responseCode = responseCode;
@@ -54,7 +54,7 @@ public class JwtErrorResponseDTO {
 		this.responseStatus = responseStatus;
 		this.timestamp = timestamp;
 	}
-	public JwtErrorResponseDTO() {
+	public JwtErrorResponse() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

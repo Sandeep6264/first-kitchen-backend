@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nt.requestDTO.OrderRequestDTO;
-import com.nt.responseDTO.OrderResponseDTO;
+import com.nt.request.OrderRequest;
+import com.nt.response.dto.OrderResponseDTO;
 import com.nt.service.IOrderService;
 import com.nt.util.ResponseUtil;
 
@@ -21,8 +21,8 @@ public class OrderOperationController {
 	private IOrderService orderService;
 	
 	@PostMapping("/placeOrder")
-	public ResponseEntity<?> placeOrder(@RequestBody OrderRequestDTO orderRequestDTO){
-		OrderResponseDTO orderResponseDTO=orderService.placeOrder(orderRequestDTO);
+	public ResponseEntity<?> placeOrder(@RequestBody OrderRequest orderRequest){
+		OrderResponseDTO orderResponseDTO=orderService.placeOrder(orderRequest);
 		return ResponseUtil.success(orderResponseDTO, "Order placed successfully");
 	}
 	

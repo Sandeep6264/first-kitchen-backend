@@ -33,7 +33,7 @@ public class SecurityConfig {
 			http.csrf( csrf -> csrf.disable())
 			.authorizeHttpRequests(auth  -> auth
 					.requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-					.requestMatchers("/auth/login","/auth/register").permitAll()
+					.requestMatchers("/auth/login","/auth/register","/auth/forgot-password","/auth/reset-password").permitAll()
 					.requestMatchers("/api/v1/payments/webhook").permitAll()
 					.requestMatchers("/api/v1/payments/**").authenticated()
 					.requestMatchers("/api/item/**","/api/order/**").hasAnyRole("USER","ADMIN")

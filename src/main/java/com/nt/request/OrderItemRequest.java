@@ -1,10 +1,10 @@
-package com.nt.requestDTO;
+package com.nt.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @JsonIgnoreProperties
-public class OrderItemRequestDTO {
+public class OrderItemRequest {
 		private Long qty;
 		private Long itemId;
 		private Double itemPrice;
@@ -28,15 +28,15 @@ public class OrderItemRequestDTO {
 		}
 		@Override
 		public String toString() {
-			return "OrderItemRequestDTO [qty=" + qty + ", itemId=" + itemId + ", itemPrice=" + itemPrice + "]";
+			return "OrderItemRequest [qty=" + qty + ", itemId=" + itemId + ", itemPrice=" + itemPrice + "]";
 		}
-		public OrderItemRequestDTO(Long qty, Long itemId, Double itemPrice) {
+		public OrderItemRequest(Long qty, Long itemId, Double itemPrice) {
 			super();
 			this.qty = qty;
 			this.itemId = itemId;
 			this.itemPrice = itemPrice;
 		}
-		public OrderItemRequestDTO() {
+		public OrderItemRequest() {
 			super();
 			// TODO Auto-generated constructor stub
 		}

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Date;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -16,10 +17,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.nt.exception.PaymentException;
-import com.nt.requestDTO.PaymentOrderRequest;
-import com.nt.requestDTO.PaymentVerificationRequest;
-import com.nt.responseDTO.PaymentOrderResponse;
-import com.nt.responseDTO.PaymentVerificationResponse;
+import com.nt.request.PaymentOrderRequest;
+import com.nt.request.PaymentVerificationRequest;
+import com.nt.response.dto.PaymentOrderResponse;
+import com.nt.response.dto.PaymentVerificationResponse;
 import com.nt.util.RazorpaySignatureUtil;
 import com.razorpay.Order;
 import com.razorpay.Payment;
@@ -60,6 +61,7 @@ this.signatureUtil = signatureUtil;
 			BigDecimal amountInPaise=request.getAmount().multiply(BigDecimal.valueOf(100));
 			
 			JSONObject orderRequest =new JSONObject();
+		
 			orderRequest.put("amount", amountInPaise.intValue());
             orderRequest.put("currency", request.getCurrency());
             orderRequest.put("receipt", request.getReceipt());
@@ -118,6 +120,7 @@ this.signatureUtil = signatureUtil;
 	          }
 			  Payment payment=razorpayClient.payments.fetch(request.getRazorpayPaymentId());
 			  String status = payment.get("status");
+			  
 			  boolean isPaymentSuccessful="captured".equals(status);
 			  if (isPaymentSuccessful) {
 	              logger.info("Payment successful for order: {}", request.getRazorpayOrderId());
@@ -216,14 +219,18 @@ this.signatureUtil = signatureUtil;
     }
 	
 	private PaymentVerificationResponse buildVerificationResponse(Payment  payment,boolean success,String message) {
-        long createdAt = payment.get("created_at");
+        Date getDate = payment.get("created_at");
+        long createdAt=getDate.getTime();
         LocalDateTime paymentDate=LocalDateTime.ofInstant(
                 Instant.ofEpochSecond(createdAt), 
                 ZoneId.systemDefault()
         );
+        Integer amountInPaise = (Integer) payment.get("amount");
+        String amount = String.valueOf(amountInPaise / 100.0);
 
 	PaymentVerificationResponse response=new PaymentVerificationResponse(success,message,payment.get("id"),payment.get("order_id"),
-			payment.get("status"),String.valueOf(Integer.parseInt(payment.get("amount"))/100),
+			payment.get("status"),
+			amount,
 			payment.get("currency"),paymentDate,payment.get("email"));
 	
 	return response;

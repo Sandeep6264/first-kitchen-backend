@@ -2,14 +2,14 @@ package com.nt.service;
 
 import java.util.List;
 
-import com.nt.requestDTO.ItemIdRequestDTO;
-import com.nt.requestDTO.ItemRequestDTO;
-import com.nt.responseDTO.ItemResponseDTO;
+import com.nt.request.ItemIdRequest;
+import com.nt.request.ItemRequest;
+import com.nt.response.dto.ItemResponseDTO;
 
 public interface IItemService {
-		public ItemResponseDTO addItem(ItemRequestDTO itemRequestDTO);
-		public ItemResponseDTO updateItem(ItemRequestDTO itemRequestDTO);
+		public ItemResponseDTO addItem(ItemRequest itemRequest);
+		public ItemResponseDTO updateItem(ItemRequest itemRequest);
 		public List<ItemResponseDTO> getAllItem();
-		public String deleteItem(ItemIdRequestDTO itemRequestDTO);
-		public ItemResponseDTO updateItemById(ItemRequestDTO itemRequestDTO);
+		public String deleteItem(ItemIdRequest itemRequestDTO);
+		public ItemResponseDTO updateItemById(ItemRequest itemRequest);
 }

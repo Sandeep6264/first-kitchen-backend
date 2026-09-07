@@ -1,10 +1,12 @@
-package com.nt.requestDTO;
+package com.nt.request;
+
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @JsonIgnoreProperties
-public class ItemRequestDTO {
+public class ItemRequest {
      private Long id;
 	
 	private String itemName;
@@ -23,6 +25,16 @@ public class ItemRequestDTO {
 
 	private String isHalf;
 	
+	private Set<String> itemIngredients;
+	
+	public Set<String> getItemIngredients() {
+		return itemIngredients;
+	}
+
+	public void setItemIngredients(Set<String> itemIngredients) {
+		this.itemIngredients = itemIngredients;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -107,14 +119,14 @@ public class ItemRequestDTO {
 
 	@Override
 	public String toString() {
-		return "ItemRequestDTO [id=" + id + ", itemName=" + itemName + ", itemImg=" + itemImg + ", description="
+		return "ItemRequest [id=" + id + ", itemName=" + itemName + ", itemImg=" + itemImg + ", description="
 				+ description + ", itemCategory=" + itemCategory + ", itemSubCategory=" + itemSubCategory
 				+ ", itemPrice=" + itemPrice + ", itemStatus=" + itemStatus + ", isHalf=" + isHalf + ", halfPrice="
 				+ halfPrice + "]";
 	}
 
-	public ItemRequestDTO(Long id, String itemName, String itemImg, String description, String itemCategory,
-			String itemSubCategory, Double itemPrice, String itemStatus, String isHalf, Double halfPrice) {
+	public ItemRequest(Long id, String itemName, String itemImg, String description, String itemCategory,
+			String itemSubCategory, Double itemPrice, String itemStatus, String isHalf, Double halfPrice,Set<String> itemIngredients) {
 		super();
 		this.id = id;
 		this.itemName = itemName;
@@ -126,9 +138,10 @@ public class ItemRequestDTO {
 		this.itemStatus = itemStatus;
 		this.isHalf = isHalf;
 		this.halfPrice = halfPrice;
+		this.itemIngredients=itemIngredients;
 	}
 
-	public ItemRequestDTO() {
+	public ItemRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

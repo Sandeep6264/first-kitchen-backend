@@ -1,9 +1,9 @@
 package com.nt.service;
 
-import com.nt.requestDTO.PaymentOrderRequest;
-import com.nt.requestDTO.PaymentVerificationRequest;
-import com.nt.responseDTO.PaymentOrderResponse;
-import com.nt.responseDTO.PaymentVerificationResponse;
+import com.nt.request.PaymentOrderRequest;
+import com.nt.request.PaymentVerificationRequest;
+import com.nt.response.dto.PaymentOrderResponse;
+import com.nt.response.dto.PaymentVerificationResponse;
 
 public interface IPaymentService {
 	PaymentOrderResponse createPaymentOrder(PaymentOrderRequest request);

@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import com.nt.entity.ItemEntity;
 import com.nt.repository.IItemRepository;
 import com.nt.repository.ItemMapper;
-import com.nt.requestDTO.ItemIdRequestDTO;
-import com.nt.requestDTO.ItemRequestDTO;
-import com.nt.responseDTO.ItemResponseDTO;
+import com.nt.request.ItemIdRequest;
+import com.nt.request.ItemRequest;
+import com.nt.response.dto.ItemResponseDTO;
 
 @Service
 public class ItemService implements IItemService {
@@ -23,16 +23,16 @@ public class ItemService implements IItemService {
 	   private ItemMapper itemMapper;
 	
 	@Override
-	public ItemResponseDTO addItem(ItemRequestDTO itemRequestDTO) {
-		if(itemRequestDTO.getId()!=null) {
-			 Optional<ItemEntity> itemContainer=itemRepository.findById(itemRequestDTO.getId());
+	public ItemResponseDTO addItem(ItemRequest itemRequest) {
+		if(itemRequest.getId()!=null) {
+			 Optional<ItemEntity> itemContainer=itemRepository.findById(itemRequest.getId());
 			 if(itemContainer.isPresent()) {
 				 throw  new IllegalArgumentException("Item already exists");
 		}
 		 }
 			
 			 ItemEntity itemEntity=new ItemEntity();
-			 BeanUtils.copyProperties(itemRequestDTO, itemEntity);
+			 BeanUtils.copyProperties(itemRequest, itemEntity);
 			 ItemEntity savedItemEntity=itemRepository.save(itemEntity);
 			ItemResponseDTO itemResponseDTO=new ItemResponseDTO();
 			BeanUtils.copyProperties(savedItemEntity, itemResponseDTO);
@@ -41,42 +41,42 @@ public class ItemService implements IItemService {
 	}
 
 	@Override
-	public ItemResponseDTO updateItem(ItemRequestDTO itemRequestDTO) {
-		ItemEntity itemEntity=itemRepository.findById(itemRequestDTO.getId()).orElseThrow(()-> new IllegalArgumentException("Item not found"));
-		if (itemRequestDTO.getItemName() != null && !itemRequestDTO.getItemName().isBlank()) {
-		    itemEntity.setItemName(itemRequestDTO.getItemName());
+	public ItemResponseDTO updateItem(ItemRequest itemRequest) {
+		ItemEntity itemEntity=itemRepository.findById(itemRequest.getId()).orElseThrow(()-> new IllegalArgumentException("Item not found"));
+		if (itemRequest.getItemName() != null && !itemRequest.getItemName().isBlank()) {
+		    itemEntity.setItemName(itemRequest.getItemName());
 		}
 
-		if (itemRequestDTO.getItemImg() != null && !itemRequestDTO.getItemImg().isBlank()) {
-		    itemEntity.setItemImg(itemRequestDTO.getItemImg());
+		if (itemRequest.getItemImg() != null && !itemRequest.getItemImg().isBlank()) {
+		    itemEntity.setItemImg(itemRequest.getItemImg());
 		}
 
-		if (itemRequestDTO.getDescription() != null && !itemRequestDTO.getDescription().isBlank()) {
-		    itemEntity.setDescription(itemRequestDTO.getDescription());
+		if (itemRequest.getDescription() != null && !itemRequest.getDescription().isBlank()) {
+		    itemEntity.setDescription(itemRequest.getDescription());
 		}
 
-		if (itemRequestDTO.getItemCategory() != null && !itemRequestDTO.getItemCategory().isBlank()) {
-		    itemEntity.setItemCategory(itemRequestDTO.getItemCategory());
+		if (itemRequest.getItemCategory() != null && !itemRequest.getItemCategory().isBlank()) {
+		    itemEntity.setItemCategory(itemRequest.getItemCategory());
 		}
 
-		if (itemRequestDTO.getItemSubCategory() != null && !itemRequestDTO.getItemSubCategory().isBlank()) {
-		    itemEntity.setItemSubCategory(itemRequestDTO.getItemSubCategory());
+		if (itemRequest.getItemSubCategory() != null && !itemRequest.getItemSubCategory().isBlank()) {
+		    itemEntity.setItemSubCategory(itemRequest.getItemSubCategory());
 		}
 
-		if (itemRequestDTO.getItemPrice() != null) {
-		    itemEntity.setItemPrice(itemRequestDTO.getItemPrice());
+		if (itemRequest.getItemPrice() != null) {
+		    itemEntity.setItemPrice(itemRequest.getItemPrice());
 		}
 
-		if (itemRequestDTO.getItemStatus() != null && !itemRequestDTO.getItemStatus().isBlank()) {
-		    itemEntity.setItemStatus(itemRequestDTO.getItemStatus());
+		if (itemRequest.getItemStatus() != null && !itemRequest.getItemStatus().isBlank()) {
+		    itemEntity.setItemStatus(itemRequest.getItemStatus());
 		}
 
-		if (itemRequestDTO.getIsHalf() != null && !itemRequestDTO.getIsHalf().isBlank()) {
-		    itemEntity.setIsHalf(itemRequestDTO.getIsHalf());
+		if (itemRequest.getIsHalf() != null && !itemRequest.getIsHalf().isBlank()) {
+		    itemEntity.setIsHalf(itemRequest.getIsHalf());
 		}
 
-		if (itemRequestDTO.getHalfPrice() != null) {
-		    itemEntity.setHalfPrice(itemRequestDTO.getHalfPrice());
+		if (itemRequest.getHalfPrice() != null) {
+		    itemEntity.setHalfPrice(itemRequest.getHalfPrice());
 		}
 		ItemEntity saveItemEntity= itemRepository.save(itemEntity);
 		ItemResponseDTO itemReponseDTO=new ItemResponseDTO();
@@ -91,7 +91,7 @@ public class ItemService implements IItemService {
 	}
 
 	@Override
-	public String deleteItem(ItemIdRequestDTO itemId) {
+	public String deleteItem(ItemIdRequest itemId) {
 		if(itemId.getItemId()==null) {
 			throw new IllegalArgumentException("Item not found");
 		}
@@ -101,7 +101,7 @@ public class ItemService implements IItemService {
 	}
 
 	@Override
-	public ItemResponseDTO updateItemById(ItemRequestDTO itemRequestDTO) {
+	public ItemResponseDTO updateItemById(ItemRequest itemRequest) {
 		// TODO Auto-generated method stub
 		return null;
 	}

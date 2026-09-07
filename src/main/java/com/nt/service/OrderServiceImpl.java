@@ -18,11 +18,11 @@ import com.nt.entity.UserEntity;
 import com.nt.repository.IItemRepository;
 import com.nt.repository.IOrderItemRepository;
 import com.nt.repository.IOrderRepostiory;
-import com.nt.requestDTO.OrderItemRequestDTO;
-import com.nt.requestDTO.OrderRequestDTO;
-import com.nt.responseDTO.OrderItemDTO;
-import com.nt.responseDTO.OrderResponseDTO;
-import com.nt.responseDTO.ReturnOrderResponseDTO;
+import com.nt.request.OrderItemRequest;
+import com.nt.request.OrderRequest;
+import com.nt.response.dto.OrderItemDTO;
+import com.nt.response.dto.OrderResponseDTO;
+import com.nt.response.dto.ReturnOrderResponseDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -39,8 +39,8 @@ public class OrderServiceImpl implements IOrderService {
 
 	@Override
 	@Transactional
-	public OrderResponseDTO placeOrder(OrderRequestDTO orderRequestDTO) {
-		Set<OrderItemRequestDTO> orderItemDTO=orderRequestDTO.getOrderItem();
+	public OrderResponseDTO placeOrder(OrderRequest orderRequest) {
+		Set<OrderItemRequest> orderItemDTO=orderRequest.getOrderItem();
 		List<Long> ids=new ArrayList<>();
 		orderItemDTO.forEach( (item)->ids.add(item.getItemId()) );
 		
@@ -62,9 +62,9 @@ public class OrderServiceImpl implements IOrderService {
 		    orderEntity.addItem(item); 
 		});
 		userEntity.setUid(1L);
-		orderEntity.setStatus(orderRequestDTO.getStatus());
-		orderEntity.setTotalAmount(orderRequestDTO.getTotalAmount());
-		orderEntity.setOrderDate(orderRequestDTO.getOrderDate());
+		orderEntity.setStatus(orderRequest.getStatus());
+		orderEntity.setTotalAmount(orderRequest.getTotalAmount());
+		orderEntity.setOrderDate(orderRequest.getOrderDate());
 		orderEntity.setUser(userEntity);	
 	
 		OrdersEntity savedRecord=orderRepository.save(orderEntity);

@@ -14,7 +14,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nt.common.CustomUserDetails;
-import com.nt.requestDTO.JwtErrorResponseDTO;
+import com.nt.request.JwtErrorResponse;
 import com.nt.util.JwtUtil;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -103,9 +103,9 @@ public class JwtAuthFilter  extends OncePerRequestFilter{
 	        response.setStatus(status);
 	        response.setContentType("application/json");
 
-	        JwtErrorResponseDTO JwtErrorResponseDTO=new JwtErrorResponseDTO(
+	        JwtErrorResponse JwtErrorResponse=new JwtErrorResponse(
 	        		status,"Unauthorized",message,"S",LocalDateTime.now());
-	        response.getWriter().write(objectMapper.writeValueAsString(JwtErrorResponseDTO));
+	        response.getWriter().write(objectMapper.writeValueAsString(JwtErrorResponse));
 	    }
 	    
 	}

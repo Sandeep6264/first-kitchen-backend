@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nt.requestDTO.PaymentOrderRequest;
-import com.nt.requestDTO.PaymentVerificationRequest;
-import com.nt.responseDTO.PaymentOrderResponse;
-import com.nt.responseDTO.PaymentVerificationResponse;
+import com.nt.request.PaymentOrderRequest;
+import com.nt.request.PaymentVerificationRequest;
+import com.nt.response.dto.PaymentOrderResponse;
+import com.nt.response.dto.PaymentVerificationResponse;
 import com.nt.service.IPaymentService;
 import com.nt.util.ResponseUtil;
 

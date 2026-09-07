@@ -1,4 +1,4 @@
-package com.nt.requestDTO;
+package com.nt.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 
 
 @JsonIgnoreProperties
-public class UserInfoDTO {
+public class UserInfoRequest {
 	private Long userId;
 	
 	@NotBlank(message="Full name is required")
@@ -103,12 +103,12 @@ public class UserInfoDTO {
 
 	@Override
 	public String toString() {
-		return "UserInfoDTO [userId=" + userId + ", fullName=" + fullName + ", emailAddress=" + emailAddress
+		return "UserInfoRequest [userId=" + userId + ", fullName=" + fullName + ", emailAddress=" + emailAddress
 				+ ", phoneNumber=" + phoneNumber + ", deliveryAddress=" + deliveryAddress + ", password=" + password
 				+ ", gender=" + gender + ", role=" + role + "]";
 	}
 
-	public UserInfoDTO(Long userId, @NotBlank(message = "Full name is required") String fullName,
+	public UserInfoRequest(Long userId, @NotBlank(message = "Full name is required") String fullName,
 			@NotBlank(message = "Email address is required") @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "Invalid email") String emailAddress,
 			@NotBlank(message = "Phone is required") String phoneNumber,
 			@NotBlank(message = "Delivery Address is required") String deliveryAddress,
@@ -126,7 +126,7 @@ public class UserInfoDTO {
 		this.role = role;
 	}
 
-	public UserInfoDTO() {
+	public UserInfoRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

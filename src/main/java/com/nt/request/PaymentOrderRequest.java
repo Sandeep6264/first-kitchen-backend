@@ -1,4 +1,4 @@
-package com.nt.requestDTO;
+package com.nt.request;
 
 import java.math.BigDecimal;
 
@@ -26,6 +26,7 @@ public class PaymentOrderRequest {
 	
 	@NotNull(message = "Customer details are required")
     private CustomerDetails customer;
+	
 	
 	 public static class CustomerDetails {
 	        @NotBlank(message = "Customer name is required")

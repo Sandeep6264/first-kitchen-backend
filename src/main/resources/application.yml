@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: prod
+    active: dev
   application:
     name: FirstKitchen
   datasource:
@@ -16,12 +16,12 @@ spring:
       ddl-auto: update
 server:
   port: 9009
-  ssl:
-     enabled: true
-     key-store: classpath:keystore.p12
-     key-store-password: Sandeep@123
-     key-store-type: PKCS12
-     key-alias: tomcat
+#  ssl:
+#     enabled: true
+#     key-store: classpath:keystore.p12
+#     key-store-password: Sandeep@123
+#     key-store-type: PKCS12
+#     key-alias: tomcat
   servlet:
     context-path: /FirstKitchen
 

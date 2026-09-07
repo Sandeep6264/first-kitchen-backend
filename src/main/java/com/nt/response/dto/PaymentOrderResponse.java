@@ -1,4 +1,4 @@
-package com.nt.responseDTO;
+package com.nt.response.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

@@ -1,4 +1,4 @@
-package com.nt.responseDTO;
+package com.nt.response.dto;
 
 public class OrderItemDTO {
     private Long itemId;

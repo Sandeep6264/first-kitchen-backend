@@ -1,11 +1,11 @@
-package com.nt.requestDTO;
+package com.nt.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.validation.constraints.NotBlank;
 
 @JsonIgnoreProperties
-public class LoginDTO {
+public class LoginInfoRequest {
 	@NotBlank(message="Username is required")
 	 private String userName;
 	
@@ -30,17 +30,17 @@ public class LoginDTO {
 
 	@Override
 	public String toString() {
-		return "LoginDTO [userName=" + userName + ", password=" + password + "]";
+		return "LoginInfoRequest [userName=" + userName + ", password=" + password + "]";
 	}
 
-	public LoginDTO(@NotBlank(message = "Username is required") String userName,
+	public LoginInfoRequest(@NotBlank(message = "Username is required") String userName,
 			@NotBlank(message = "Password is required") String password) {
 		super();
 		this.userName = userName;
 		this.password = password;
 	}
 
-	public LoginDTO() {
+	public LoginInfoRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

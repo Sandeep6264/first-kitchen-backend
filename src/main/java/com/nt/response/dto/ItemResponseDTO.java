@@ -1,4 +1,6 @@
-package com.nt.responseDTO;
+package com.nt.response.dto;
+
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,6 +26,28 @@ public class ItemResponseDTO {
 	private String isHalf;
 	
 	private Double halfPrice;
+	
+	private String itemDescription;
+	
+	private List<String> itemIngredients;
+	
+	
+
+	public String getItemDescription() {
+		return itemDescription;
+	}
+
+	public void setItemDescription(String itemDescription) {
+		this.itemDescription = itemDescription;
+	}
+
+	public List<String> getItemIngredients() {
+		return itemIngredients;
+	}
+
+	public void setItemIngredients(List<String> itemIngredients) {
+		this.itemIngredients = itemIngredients;
+	}
 
 	public Long getItemId() {
 		return itemId;

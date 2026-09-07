@@ -1,8 +1,8 @@
-package com.nt.requestDTO;
+package com.nt.request;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class ItemIdRequestDTO {
+public class ItemIdRequest {
 	@NotBlank(message="Item id is required")
 	private Long itemId;
 
@@ -16,15 +16,15 @@ public class ItemIdRequestDTO {
 
 	@Override
 	public String toString() {
-		return "ItemIdRequestDTO [itemId=" + itemId + "]";
+		return "ItemIdRequest [itemId=" + itemId + "]";
 	}
 
-	public ItemIdRequestDTO(@NotBlank(message = "Item id is required") Long itemId) {
+	public ItemIdRequest(@NotBlank(message = "Item id is required") Long itemId) {
 		super();
 		this.itemId = itemId;
 	}
 
-	public ItemIdRequestDTO() {
+	public ItemIdRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

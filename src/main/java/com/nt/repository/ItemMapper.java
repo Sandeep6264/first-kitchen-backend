@@ -6,8 +6,8 @@ import java.util.Set;
 import org.mapstruct.Mapper;
 
 import com.nt.entity.ItemEntity;
-import com.nt.requestDTO.OrderItemRequestDTO;
-import com.nt.responseDTO.ItemResponseDTO;
+import com.nt.request.OrderItemRequest;
+import com.nt.response.dto.ItemResponseDTO;
 
 @Mapper(componentModel = "spring")
 public interface ItemMapper {
@@ -16,8 +16,8 @@ public interface ItemMapper {
 
     List<ItemResponseDTO> toDTOList(List<ItemEntity> entityList);
     
-    ItemEntity toSetDTO(OrderItemRequestDTO dto);
+    ItemEntity toSetDTO(OrderItemRequest dto);
     
-    Set<ItemEntity> toDTOSet(Set<OrderItemRequestDTO> orderItemDTO);
+    Set<ItemEntity> toDTOSet(Set<OrderItemRequest> orderItemDTO);
     
 }

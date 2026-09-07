@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nt.requestDTO.ItemIdRequestDTO;
-import com.nt.requestDTO.ItemRequestDTO;
-import com.nt.responseDTO.ItemResponseDTO;
+import com.nt.request.ItemIdRequest;
+import com.nt.request.ItemRequest;
+import com.nt.response.dto.ItemResponseDTO;
 import com.nt.service.IItemService;
 import com.nt.util.ResponseUtil;
 
@@ -26,8 +26,8 @@ public class ItemOperationRestController {
 	private IItemService itemService;
 	
 	@PostMapping("/addItem")
-	public ResponseEntity<?> addItem(@RequestBody ItemRequestDTO itemRequestDTO ){
-	  ItemResponseDTO itemResponseDTO=  itemService.addItem(itemRequestDTO);
+	public ResponseEntity<?> addItem(@RequestBody ItemRequest itemRequest ){
+	  ItemResponseDTO itemResponseDTO=  itemService.addItem(itemRequest);
 	  System.out.println(itemResponseDTO);
 	  return ResponseUtil.success(itemResponseDTO, "Item saved successfully");
 	}
@@ -49,7 +49,7 @@ public class ItemOperationRestController {
 	}
 	
 	@DeleteMapping("/deleteItem")
-	public  ResponseEntity<?> deleteItem(@RequestBody ItemIdRequestDTO itemId){
+	public  ResponseEntity<?> deleteItem(@RequestBody ItemIdRequest itemId){
 		String message=itemService.deleteItem(itemId);
 		return ResponseUtil.success(null, message);
 	}
